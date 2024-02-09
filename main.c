@@ -133,7 +133,9 @@ void exitScreen() {
 }
 
 void backToMenu() {
-  system("pause");
+  printf("Pressione qualquer tecla para voltar ao menu principal...\n");
+  fflush(stdin);
+  getchar();
   clearScreen();
   menuScreen();
 }
