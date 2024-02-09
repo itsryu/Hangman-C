@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdbool.h>
 #include <stdlib.h>
 #include <string.h>
 #include <locale.h>
@@ -145,6 +146,7 @@ void gameEngine(char *word, int max_attempts) {
 
   char spaces[MAX_LENGTH] = "";
   char triedLetters[MAX_LENGTH] = "";
+  bool hasEnded = false;
   char letter;
 
   for (int i = 0; i < strlen(word); i++) {
@@ -171,10 +173,19 @@ void gameEngine(char *word, int max_attempts) {
       }
     }
 
-    if (strstr(spaces, "_") == NULL) {
+
+    for (int i = 0; i < strlen(spaces); i++) {
+      if (spaces[i] == '_') {
+        hasEnded = false;
+        break;
+      } else {
+        hasEnded = true;
+      }
+    }
+
+    if (hasEnded) {
       printf("Parabéns! Você acertou a palavra: %s\n", word);
       backToMenu();
-      break;
     }
 
     if (!hasWord) {
