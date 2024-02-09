@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <conio.h>
 #include <locale.h>
 #include <time.h>
 
@@ -31,8 +30,12 @@ void configEnviroment() {
   system("color 0A");
 };
 
-void clearScreen() { 
-  system("CLS");
+void clearScreen() {
+  #ifdef _WIN32
+    system("cls");
+  #elif __linux__
+    system("clear");
+  #endif
 }
 
 void menuScreen() {
@@ -130,8 +133,7 @@ void exitScreen() {
 }
 
 void backToMenu() {
-  printf("Pressione qualquer tecla para voltar ao menu principal...");
-  getch();
+  system("pause");
   clearScreen();
   menuScreen();
 }
